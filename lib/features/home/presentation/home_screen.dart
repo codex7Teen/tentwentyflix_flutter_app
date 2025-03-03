@@ -7,7 +7,13 @@ import 'package:tentwentyflix/core/config/app_colors.dart';
 import 'package:tentwentyflix/core/config/app_textstyles.dart';
 
 class ScreenHome extends StatelessWidget {
-  const ScreenHome({super.key});
+  // Add a callback for search navigation
+  final VoidCallback onSearchTap;
+  
+  const ScreenHome({
+    super.key, 
+    required this.onSearchTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +24,8 @@ class ScreenHome extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor:
-            AppColors.whiteColor, // Set status bar background color to black
-        statusBarIconBrightness: Brightness.dark, // Set icons to light mode
+            AppColors.whiteColor, // Set status bar background color to white
+        statusBarIconBrightness: Brightness.dark, // Set icons to dark mode
       ),
     );
 
@@ -35,7 +41,7 @@ class ScreenHome extends StatelessWidget {
           child: AppBar(
             backgroundColor: AppColors.whiteColor,
             flexibleSpace: Padding(
-              padding: const EdgeInsets.only(left: 20),
+              padding: const EdgeInsets.only(left: 22),
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -46,11 +52,14 @@ class ScreenHome extends StatelessWidget {
             ),
             actions: [
               Padding(
-                padding: const EdgeInsets.only(right: 20, top: 16),
-                child: Icon(
-                  Icons.search_rounded,
-                  color: AppColors.blackColor,
-                  size: 23,
+                padding: const EdgeInsets.only(right: 22, top: 16),
+                child: GestureDetector(
+                  onTap: onSearchTap, // Use the callback
+                  child: Icon(
+                    Icons.search_rounded,
+                    color: AppColors.blackColor,
+                    size: 23.5,
+                  ),
                 ),
               ),
             ],

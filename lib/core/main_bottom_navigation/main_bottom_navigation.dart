@@ -1,62 +1,123 @@
+// main_bottom_navigation.dart
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tentwentyflix/core/config/app_colors.dart';
 import 'package:tentwentyflix/features/home/presentation/home_screen.dart';
 import 'package:tentwentyflix/features/search/presentation/screens/search_screen.dart';
+import 'package:tentwentyflix/shared/navigation_helper.dart';
 
-class MainBottomNavigation extends StatelessWidget {
-  MainBottomNavigation({super.key});
+// Create a global key for the MainBottomNavigation state
+final GlobalKey<MainBottomNavigationState> bottomNavKey = GlobalKey<MainBottomNavigationState>();
+
+class MainBottomNavigation extends StatefulWidget {
+  // The normal key constructor, not trying to set both super.key and bottomNavKey
+  const MainBottomNavigation({super.key});
+
+  @override
+  MainBottomNavigationState createState() => MainBottomNavigationState();
+}
+
+// Make the state class public so it can be accessed from other files
+class MainBottomNavigationState extends State<MainBottomNavigation> {
+  // Current selected index for the bottom navigation
+  int _selectedIndex = 1; // Start with Watch selected (index 1)
+  
+  // List of screens to display based on navigation index
+  late final List<Widget> _screens;
+  
+  @override
+  void initState() {
+    super.initState();
+    // Initialize screens in initState to avoid recreation on each build
+    _screens = [
+      const Center(child: Text('Dashboard Screen')), // Placeholder for Dashboard
+      ScreenHome(onSearchTap: navigateToSearch), // Watch screen with callback
+      const Center(child: Text('Media Library Screen')), // Placeholder for Media Library
+      const Center(child: Text('More Screen')), // Placeholder for More
+    ];
+  }
+
+  // Public method to navigate to search screen
+  void navigateToSearch() {
+    NavigationHelper.navigateToWithoutReplacement(context, _buildSearchScreenWithNav());
+  }
+  
+  // Build method for search screen with navigation
+  Widget _buildSearchScreenWithNav() {
+    return Scaffold(
+      body: const ScreenSearch(),
+      bottomNavigationBar: _buildBottomNavigationBar(),
+    );
+  }
+
+  // Method to handle bottom navigation item taps
+  void onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+  
+  // Extract bottom navigation bar as a separate widget to reuse
+  Widget _buildBottomNavigationBar() {
+    final screenHeight = MediaQuery.sizeOf(context).height;
+    
+    return Container(
+      height: screenHeight > 500 ? screenHeight * 0.096 : screenHeight * 0.195,
+      decoration: BoxDecoration(
+        color: AppColors.darkPurpleThemeColor,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(37),
+          topRight: Radius.circular(37),
+        ),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: BottomNavigationBar(
+          // Custom font styles for labels
+          selectedLabelStyle: GoogleFonts.roboto(fontWeight: FontWeight.bold),
+          unselectedLabelStyle: GoogleFonts.roboto(fontSize: 12.2),
+        
+          // Current selected index
+          currentIndex: _selectedIndex,
+          onTap: (index) {
+            if (Navigator.canPop(context) && index != _selectedIndex) {
+              // If we're on a pushed screen, pop back first
+              Navigator.pop(context);
+            }
+            onItemTapped(index);
+          },
+        
+          // Colors for selected and unselected items
+          selectedItemColor: AppColors.whiteColor,
+          unselectedItemColor: AppColors.darkGreyThemeColor,
+        
+          // Fixed navigation bar
+          type: BottomNavigationBarType.fixed,
+        
+          // Transparent background
+          backgroundColor: Colors.transparent,
+        
+          // Navigation items
+          items: List.generate(navBarIcons.length, (index) {
+            return BottomNavigationBarItem(
+              icon: Padding(
+                padding: const EdgeInsets.only(top: 4),
+                child: Image.asset(navBarIcons[index], width: 32),
+              ),
+              label: navBarLabels[index],
+            );
+          }),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.sizeOf(context).height;
-    // log("SCREEN HEIGHT: ${screenHeight.toString()}");
     return Scaffold(
-      // Main screen content
-      body: ScreenSearch(),
-      bottomNavigationBar: Container(
-        height:
-            screenHeight > 500 ? screenHeight * 0.096 : screenHeight * 0.195,
-        decoration: BoxDecoration(
-          color: AppColors.darkPurpleThemeColor,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(37),
-            topRight: Radius.circular(37),
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: BottomNavigationBar(
-            // Custom font styles for labels
-            selectedLabelStyle: GoogleFonts.roboto(fontWeight: FontWeight.bold),
-            unselectedLabelStyle: GoogleFonts.roboto(fontSize: 12.2),
-          
-            // Default selected index
-            currentIndex: 1,
-          
-            // Colors for selected and unselected items
-            selectedItemColor: AppColors.whiteColor,
-            unselectedItemColor: AppColors.darkGreyThemeColor,
-          
-            // Fixed navigation bar
-            type: BottomNavigationBarType.fixed,
-          
-            // Transparent background
-            backgroundColor: Colors.transparent,
-          
-            // Generating navigation items dynamically
-            items: List.generate(navBarIcons.length, (index) {
-              return BottomNavigationBarItem(
-                icon: Padding(
-                  padding: const EdgeInsets.only(top: 4),
-                  child: Image.asset(navBarIcons[index], width: 32),
-                ),
-                label: navBarLabels[index],
-              );
-            }),
-          ),
-        ),
-      ),
+      // Display the selected screen
+      body: _screens[_selectedIndex],
+      bottomNavigationBar: _buildBottomNavigationBar(),
     );
   }
 

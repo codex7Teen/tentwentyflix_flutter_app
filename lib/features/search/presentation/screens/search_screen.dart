@@ -34,6 +34,7 @@ class ScreenSearch extends StatelessWidget {
           child: AppBar(
             backgroundColor: AppColors.whiteColor,
             elevation: 0,
+            automaticallyImplyLeading: false,
             //! S E A R C H - B A R
             flexibleSpace: Center(
               child: Padding(
@@ -70,6 +71,7 @@ class ScreenSearch extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           // Handle close action
+                          Navigator.pop(context);
                         },
                         child: Image.asset(
                           'assets/icons/close_icon.png',
