@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tentwentyflix/features/home/presentation/home_screen.dart';
+import 'package:tentwentyflix/core/main_bottom_navigation/main_bottom_navigation.dart';
 
+//! ROOT
 void main() {
   runApp(const MyApp());
 }
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.black),
         useMaterial3: true,
       ),
-      home: ScreenHome(),
+      home: MainBottomNavigation(),
     );
   }
 }
