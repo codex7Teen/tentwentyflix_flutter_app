@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tentwentyflix/core/config/app_colors.dart';
 import 'package:tentwentyflix/features/home/presentation/home_screen.dart';
+import 'package:tentwentyflix/features/search/presentation/screens/search_screen.dart';
 
 class MainBottomNavigation extends StatelessWidget {
   MainBottomNavigation({super.key});
@@ -12,7 +13,7 @@ class MainBottomNavigation extends StatelessWidget {
     // log("SCREEN HEIGHT: ${screenHeight.toString()}");
     return Scaffold(
       // Main screen content
-      body: ScreenHome(),
+      body: ScreenSearch(),
       bottomNavigationBar: Container(
         height:
             screenHeight > 500 ? screenHeight * 0.096 : screenHeight * 0.195,
