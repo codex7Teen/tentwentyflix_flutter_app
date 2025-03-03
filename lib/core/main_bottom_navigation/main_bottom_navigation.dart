@@ -8,11 +8,14 @@ class MainBottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.sizeOf(context).height;
+    // log("SCREEN HEIGHT: ${screenHeight.toString()}");
     return Scaffold(
       // Main screen content
       body: ScreenHome(),
       bottomNavigationBar: Container(
-        height: MediaQuery.sizeOf(context).height * 0.096,
+        height:
+            screenHeight > 500 ? screenHeight * 0.096 : screenHeight * 0.195,
         decoration: BoxDecoration(
           color: AppColors.darkPurpleThemeColor,
           borderRadius: BorderRadius.only(
@@ -20,34 +23,37 @@ class MainBottomNavigation extends StatelessWidget {
             topRight: Radius.circular(37),
           ),
         ),
-        child: BottomNavigationBar(
-          // Custom font styles for labels
-          selectedLabelStyle: GoogleFonts.roboto(fontWeight: FontWeight.bold),
-          unselectedLabelStyle: GoogleFonts.roboto(fontSize: 12.2),
-
-          // Default selected index
-          currentIndex: 1,
-
-          // Colors for selected and unselected items
-          selectedItemColor: AppColors.whiteColor,
-          unselectedItemColor: AppColors.darkGreyThemeColor,
-
-          // Fixed navigation bar
-          type: BottomNavigationBarType.fixed,
-
-          // Transparent background
-          backgroundColor: Colors.transparent,
-
-          // Generating navigation items dynamically
-          items: List.generate(navBarIcons.length, (index) {
-            return BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.only(top: 4),
-                child: Image.asset(navBarIcons[index], width: 32),
-              ),
-              label: navBarLabels[index],
-            );
-          }),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: BottomNavigationBar(
+            // Custom font styles for labels
+            selectedLabelStyle: GoogleFonts.roboto(fontWeight: FontWeight.bold),
+            unselectedLabelStyle: GoogleFonts.roboto(fontSize: 12.2),
+          
+            // Default selected index
+            currentIndex: 1,
+          
+            // Colors for selected and unselected items
+            selectedItemColor: AppColors.whiteColor,
+            unselectedItemColor: AppColors.darkGreyThemeColor,
+          
+            // Fixed navigation bar
+            type: BottomNavigationBarType.fixed,
+          
+            // Transparent background
+            backgroundColor: Colors.transparent,
+          
+            // Generating navigation items dynamically
+            items: List.generate(navBarIcons.length, (index) {
+              return BottomNavigationBarItem(
+                icon: Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Image.asset(navBarIcons[index], width: 32),
+                ),
+                label: navBarLabels[index],
+              );
+            }),
+          ),
         ),
       ),
     );
