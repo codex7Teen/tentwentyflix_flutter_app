@@ -108,7 +108,7 @@ class SearchScreenWidgets {
       onTap:
           () => NavigationHelper.navigateToWithoutReplacement(
             context,
-            ScreenMovieDetails(),
+            ScreenMovieDetails(movieModel: movie),
           ),
       child: Padding(
         padding: const EdgeInsets.only(top: 16),

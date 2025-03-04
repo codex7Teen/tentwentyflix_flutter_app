@@ -9,6 +9,8 @@ class AppTextstyles {
     fontWeight: FontWeight.w500,
   );
 
+  static TextStyle genresTextsWhite = GoogleFonts.poppins(color: AppColors.whiteColor, fontSize: 14);
+
   static TextStyle subHeadingTextPoppinsDarkpurple = GoogleFonts.poppins(
     fontSize: 15,
     color: AppColors.darkPurpleThemeColor,
