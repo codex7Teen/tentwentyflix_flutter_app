@@ -1,7 +1,6 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:tentwentyflix/core/utils/app_constants.dart';
-import '../models/upcoming_movie_model.dart';
+import '../models/movie_model.dart';
 
 class UpcomingMovieService {
   final Dio _dio = Dio();
@@ -10,7 +9,7 @@ class UpcomingMovieService {
 
   //! Fetches upcoming movies from the TMDB API
   //! Uses Dio for network requests and handles different HTTP status codes
-  Future<List<UpcomingMovieModel>> fetchUpcomingMovies() async {
+  Future<List<MovieModel>> fetchUpcomingMovies() async {
     try {
       //! Making a GET request to fetch upcoming movies
       final response = await _dio.get("$baseUrl?api_key=$apiKey");
@@ -18,21 +17,19 @@ class UpcomingMovieService {
       // Checking response status codes and handling errors accordingly
       if (response.statusCode == 200) {
         // Successfully retrieved movie data, parsing JSON
-        return UpcomingMovieModel.fromJsonList(json.encode(response.data));
+        return MovieModel.fromJsonList(
+          response.data,
+        ); // ✅ Pass response.data directly
       } else if (response.statusCode == 401) {
-        // Unauthorized - Invalid API key
         throw Exception("Unauthorized: Invalid API key");
       } else if (response.statusCode == 404) {
-        // Not Found - The requested resource was not found
         throw Exception("Not Found: The requested resource was not found");
       } else {
-        // Other status codes - Generic error message
         throw Exception(
           "Failed to load movies. Status Code: ${response.statusCode}",
         );
       }
     } catch (e) {
-      //! Catching any unexpected errors during the API call
       throw Exception("Error fetching movies: $e");
     }
   }

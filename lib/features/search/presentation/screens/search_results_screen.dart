@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tentwentyflix/core/config/app_colors.dart';
-import 'package:tentwentyflix/data/models/search_movie_model.dart';
+import 'package:tentwentyflix/data/models/movie_model.dart';
 import 'package:tentwentyflix/features/search/presentation/widgets/search_results_screen_widgets.dart';
 import 'package:tentwentyflix/features/search/presentation/widgets/search_screen_widgets.dart';
 import 'package:tentwentyflix/core/main_bottom_navigation/main_bottom_navigation.dart'; // Import the MainBottomNavigation

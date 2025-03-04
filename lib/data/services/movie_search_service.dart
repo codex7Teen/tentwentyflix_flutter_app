@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:tentwentyflix/core/utils/app_constants.dart';
-import 'package:tentwentyflix/data/models/search_movie_model.dart';
+import 'package:tentwentyflix/data/models/movie_model.dart';
 
 class MovieSearchService {
   final Dio _dio = Dio();

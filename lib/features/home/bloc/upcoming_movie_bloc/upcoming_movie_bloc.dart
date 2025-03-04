@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tentwentyflix/data/models/upcoming_movie_model.dart';
+import 'package:tentwentyflix/data/models/movie_model.dart';
 import 'package:tentwentyflix/data/repositories/upcoming_movie_repository.dart';
 
 part 'upcoming_movie_event.dart';

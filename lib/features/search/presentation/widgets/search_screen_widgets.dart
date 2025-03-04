@@ -4,7 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tentwentyflix/core/config/app_colors.dart';
 import 'package:tentwentyflix/core/config/app_textstyles.dart';
 import 'package:tentwentyflix/core/utils/genre_util.dart';
-import 'package:tentwentyflix/data/models/search_movie_model.dart';
+import 'package:tentwentyflix/data/models/movie_model.dart';
+import 'package:tentwentyflix/features/details/presentation/screens/movie_details_screen.dart';
 import 'package:tentwentyflix/features/search/bloc/movie_search_bloc/movie_search_bloc.dart';
 import 'package:tentwentyflix/features/search/presentation/screens/search_results_screen.dart';
 import 'package:tentwentyflix/shared/navigation_helper.dart';
@@ -103,72 +104,79 @@ class SearchScreenWidgets {
     double screenHeight,
     double screenWidth,
   ) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 16),
-      child: Row(
-        children: [
-          // Movie poster
-          ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: Image.network(
-              movie.getFullPosterPath(),
-              width: screenWidth * 0.39,
-              height: screenHeight * 0.12,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  width: screenWidth * 0.39,
-                  height: screenHeight * 0.12,
-                  color: Colors.grey.shade300,
-                  child: Icon(Icons.movie, size: 40, color: Colors.grey),
-                );
-              },
-            ),
+    return GestureDetector(
+      onTap:
+          () => NavigationHelper.navigateToWithoutReplacement(
+            context,
+            ScreenMovieDetails(),
           ),
-
-          // Movie details
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          movie.title,
-                          style: AppTextstyles.headingTextPoppinsDarkPurple,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        SizedBox(height: 5),
-                        // Display genre names
-                        Text(
-                          GenreUtil.getGenreNames(movie.genreIds),
-                          style: GoogleFonts.poppins(
-                            color: AppColors.lightGreyColor,
-                            fontSize: 11,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8),
-                    child: Image.asset(
-                      'assets/icons/threedots_icon_blue.png',
-                      width: 16,
-                    ),
-                  ),
-                ],
+      child: Padding(
+        padding: const EdgeInsets.only(top: 16),
+        child: Row(
+          children: [
+            // Movie poster
+            ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Image.network(
+                movie.getFullPosterPath(),
+                width: screenWidth * 0.39,
+                height: screenHeight * 0.12,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    width: screenWidth * 0.39,
+                    height: screenHeight * 0.12,
+                    color: Colors.grey.shade300,
+                    child: Icon(Icons.movie, size: 40, color: Colors.grey),
+                  );
+                },
               ),
             ),
-          ),
-        ],
+
+            // Movie details
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            movie.title,
+                            style: AppTextstyles.headingTextPoppinsDarkPurple,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          SizedBox(height: 5),
+                          // Display genre names
+                          Text(
+                            GenreUtil.getGenreNames(movie.genreIds),
+                            style: GoogleFonts.poppins(
+                              color: AppColors.lightGreyColor,
+                              fontSize: 11,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8),
+                      child: Image.asset(
+                        'assets/icons/threedots_icon_blue.png',
+                        width: 16,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

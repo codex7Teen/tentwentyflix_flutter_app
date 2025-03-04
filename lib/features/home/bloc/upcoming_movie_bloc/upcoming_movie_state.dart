@@ -12,7 +12,7 @@ final class UpcomingMovieInitial extends UpcomingMovieState {}
 final class UpcomingMovieLoading extends UpcomingMovieState {}
 
 class UpcomingMovieLoaded extends UpcomingMovieState {
-  final List<UpcomingMovieModel> movies;
+  final List<MovieModel> movies;
   const UpcomingMovieLoaded({required this.movies});
 
   @override

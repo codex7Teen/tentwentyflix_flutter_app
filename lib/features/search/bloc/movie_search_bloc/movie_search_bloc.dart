@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tentwentyflix/data/models/search_movie_model.dart';
+import 'package:tentwentyflix/data/models/movie_model.dart';
 import 'package:tentwentyflix/data/repositories/movie_search_repository.dart';
 
 part 'movie_search_event.dart';

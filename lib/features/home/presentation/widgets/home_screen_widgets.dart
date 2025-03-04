@@ -29,10 +29,10 @@ class HomeScreenWidgets {
               ),
             ),
             actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 22, top: 16),
-                child: GestureDetector(
-                  onTap: onTap,
+              GestureDetector(
+                onTap: onTap,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 22, top: 16),
                   child: Icon(
                     Icons.search_rounded,
                     color: AppColors.blackColor,
