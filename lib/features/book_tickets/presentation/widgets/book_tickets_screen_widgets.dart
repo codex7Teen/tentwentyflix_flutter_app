@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:tentwentyflix/core/config/app_colors.dart';
 import 'package:tentwentyflix/core/config/app_textstyles.dart';
+import 'package:tentwentyflix/data/models/movie_model.dart';
 import 'package:tentwentyflix/features/book_tickets/presentation/screens/select_seats_screen.dart';
 import 'package:tentwentyflix/features/book_tickets/presentation/widgets/arc_painter_widget.dart';
 import 'package:tentwentyflix/shared/custom_blue_button.dart';
@@ -273,7 +274,7 @@ class BookTicketsScreenWidgets {
     (index) => DateTime.now().add(Duration(days: index)),
   );
 
-  static buildSelectSeatsButton(BuildContext context) {
+  static buildSelectSeatsButton(BuildContext context, MovieModel movieModel) {
     return Padding(
       padding: const EdgeInsets.only(right: 20),
       child: CustomBlueButton(
@@ -281,7 +282,7 @@ class BookTicketsScreenWidgets {
         onTap:
             () => NavigationHelper.navigateToWithoutReplacement(
               context,
-              ScreenSelectSeats(),
+              ScreenSelectSeats(movieModel: movieModel),
             ),
       ),
     );

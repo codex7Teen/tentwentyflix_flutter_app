@@ -122,7 +122,7 @@ class ScreenMovieDetails extends StatelessWidget {
                               () =>
                                   NavigationHelper.navigateToWithoutReplacement(
                                     context,
-                                    ScreenBookTickets(),
+                                    ScreenBookTickets(movieModel: movieModel),
                                   ),
                           child: Container(
                             padding: EdgeInsets.symmetric(

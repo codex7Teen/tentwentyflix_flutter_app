@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tentwentyflix/core/config/app_colors.dart';
 import 'package:tentwentyflix/core/utils/screen_dimension_util.dart';
+import 'package:tentwentyflix/data/models/movie_model.dart';
 import 'package:tentwentyflix/features/book_tickets/presentation/widgets/book_tickets_screen_widgets.dart';
 
 class ScreenBookTickets extends StatelessWidget {
-  // final MovieModel movieModel;
-  const ScreenBookTickets({super.key});
+  final MovieModel movieModel;
+  const ScreenBookTickets({super.key, required this.movieModel});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,10 @@ class ScreenBookTickets extends StatelessWidget {
             ),
             Spacer(),
             //! SELECT SEATS BUTTON
-            BookTicketsScreenWidgets.buildSelectSeatsButton(context),
+            BookTicketsScreenWidgets.buildSelectSeatsButton(
+              context,
+              movieModel,
+            ),
           ],
         ),
       ),

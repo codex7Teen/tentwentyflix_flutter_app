@@ -1,4 +1,3 @@
-import 'package:dio/io.dart';
 import 'package:flutter/material.dart';
 import 'package:tentwentyflix/core/config/app_colors.dart';
 import 'package:tentwentyflix/core/config/app_textstyles.dart';

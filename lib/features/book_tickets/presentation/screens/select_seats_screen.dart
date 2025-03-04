@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tentwentyflix/core/config/app_colors.dart';
 import 'package:tentwentyflix/core/utils/screen_dimension_util.dart';
+import 'package:tentwentyflix/data/models/movie_model.dart';
 import 'package:tentwentyflix/features/book_tickets/presentation/widgets/select_seats_screen_widgets.dart';
 
 class ScreenSelectSeats extends StatelessWidget {
-  // final MovieModel movieModel;
-  const ScreenSelectSeats({super.key});
+  final MovieModel movieModel;
+  const ScreenSelectSeats({super.key, required this.movieModel});
 
   @override
   Widget build(BuildContext context) {
