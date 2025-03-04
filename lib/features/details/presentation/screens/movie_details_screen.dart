@@ -1,11 +1,15 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:tentwentyflix/core/config/app_colors.dart';
 import 'package:tentwentyflix/core/config/app_textstyles.dart';
 import 'package:tentwentyflix/core/utils/genre_util.dart';
 import 'package:tentwentyflix/data/models/movie_model.dart';
+import 'package:tentwentyflix/features/details/bloc/movie_trailer_bloc/trailer_bloc.dart';
+import 'package:tentwentyflix/features/details/bloc/movie_trailer_bloc/trailer_state.dart';
+import 'package:tentwentyflix/features/details/presentation/screens/trailer_player_screen.dart';
 
 class ScreenMovieDetails extends StatelessWidget {
   final MovieModel movieModel;
@@ -137,31 +141,42 @@ class ScreenMovieDetails extends StatelessWidget {
                         SizedBox(height: 10),
 
                         //! WATCH TRAILER BUTTON
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 58,
-                            vertical: 14,
-                          ),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: AppColors.blueThemeColor),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            spacing: 5,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.play_arrow,
-                                color: AppColors.whiteColor,
-                                size: 24,
+                        GestureDetector(
+                          onTap: () {
+                            // Trigger trailer loading and playback
+                            context.read<TrailerBloc>().add(
+                              LoadTrailerEvent(movieModel.id),
+                            );
+                            _showTrailerDialog(context);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 58,
+                              vertical: 14,
+                            ),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: AppColors.blueThemeColor,
                               ),
-                              Text(
-                                'Watch Trailer',
-                                style: AppTextstyles.headingTextPoppinsWhite,
-                              ),
-                            ],
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              spacing: 5,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.play_arrow,
+                                  color: AppColors.whiteColor,
+                                  size: 24,
+                                ),
+                                Text(
+                                  'Watch Trailer',
+                                  style: AppTextstyles.headingTextPoppinsWhite,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ],
@@ -273,6 +288,53 @@ class ScreenMovieDetails extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  // Add this method to the ScreenMovieDetails class
+  void _showTrailerDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return BlocBuilder<TrailerBloc, TrailerState>(
+          builder: (context, state) {
+            if (state is TrailerLoadingState) {
+              return Center(child: CircularProgressIndicator());
+            }
+
+            if (state is TrailerLoadedState) {
+              if (state.trailers.isNotEmpty) {
+                // Automatically play the first trailer
+                context.read<TrailerBloc>().add(
+                  PlayTrailerEvent(state.trailers.first.key),
+                );
+              } else {
+                return AlertDialog(
+                  title: Text('No Trailers'),
+                  content: Text('No trailers are available for this movie.'),
+                );
+              }
+            }
+
+            if (state is TrailerPlayingState &&
+                state.playerController != null) {
+              return TrailerPlayerScreen(
+                videoKey: state.videoKey,
+                playerController: state.playerController!,
+              );
+            }
+
+            if (state is TrailerErrorState) {
+              return AlertDialog(
+                title: Text('Error'),
+                content: Text(state.errorMessage),
+              );
+            }
+
+            return Container(); // Fallback empty container
+          },
+        );
+      },
     );
   }
 }

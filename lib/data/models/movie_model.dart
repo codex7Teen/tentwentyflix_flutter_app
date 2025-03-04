@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:tentwentyflix/core/utils/app_constants.dart';
 
 //! MovieModel class to represent movie details
@@ -42,7 +41,8 @@ class MovieModel {
       backdropPath: json['backdrop_path'],
       releaseDate: json['release_date'] ?? '',
       voteAverage: (json['vote_average'] ?? 0.0).toDouble(),
-      genreIds: json['genre_ids'] != null ? List<int>.from(json['genre_ids']) : [],
+      genreIds:
+          json['genre_ids'] != null ? List<int>.from(json['genre_ids']) : [],
     );
   }
 
