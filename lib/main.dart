@@ -7,6 +7,7 @@ import 'package:tentwentyflix/data/repositories/movie_genre_repository.dart';
 import 'package:tentwentyflix/data/repositories/movie_search_repository.dart';
 import 'package:tentwentyflix/data/repositories/trailer_repository.dart';
 import 'package:tentwentyflix/data/repositories/upcoming_movie_repository.dart';
+import 'package:tentwentyflix/features/book_tickets/presentation/screens/book_tickets_screen.dart';
 import 'package:tentwentyflix/features/details/bloc/movie_trailer_bloc/trailer_bloc.dart';
 import 'package:tentwentyflix/features/home/bloc/upcoming_movie_bloc/upcoming_movie_bloc.dart';
 import 'package:tentwentyflix/features/search/bloc/movie_genre_bloc/movie_genre_bloc.dart';
@@ -56,8 +57,9 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         debugShowCheckedModeBanner: false,
-        home: MainBottomNavigation(key: bottomNavKey),
+        home: ScreenBookTickets(),
       ),
     );
   }
 }
+// MainBottomNavigation(key: bottomNavKey)

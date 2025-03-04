@@ -5,27 +5,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:tentwentyflix/core/config/app_colors.dart';
 import 'package:tentwentyflix/core/config/app_textstyles.dart';
+import 'package:tentwentyflix/core/utils/format_date_util.dart';
 import 'package:tentwentyflix/core/utils/genre_util.dart';
 import 'package:tentwentyflix/data/models/movie_model.dart';
+import 'package:tentwentyflix/features/book_tickets/presentation/screens/book_tickets_screen.dart';
 import 'package:tentwentyflix/features/details/bloc/movie_trailer_bloc/trailer_bloc.dart';
 import 'package:tentwentyflix/features/details/bloc/movie_trailer_bloc/trailer_state.dart';
 import 'package:tentwentyflix/features/details/presentation/screens/trailer_player_screen.dart';
 import 'package:tentwentyflix/features/details/presentation/widgets/no_trailer_dialog_widget.dart';
+import 'package:tentwentyflix/shared/navigation_helper.dart';
 
 class ScreenMovieDetails extends StatelessWidget {
   final MovieModel movieModel;
   const ScreenMovieDetails({super.key, required this.movieModel});
-
-  // Formatted Movie release date
-  String formatReleaseDate(String date) {
-    try {
-      DateTime parsedDate = DateTime.parse(date);
-      String formattedDate = DateFormat('MMMM dd, yyyy').format(parsedDate);
-      return formattedDate;
-    } catch (e) {
-      return "Release date not available";
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -120,23 +112,31 @@ class ScreenMovieDetails extends StatelessWidget {
                       children: [
                         //! RELEASE DATE TEXT
                         Text(
-                          "In Theaters ${formatReleaseDate(movieModel.releaseDate)}",
+                          "In Theaters ${FormatDateUtil.formatReleaseDate(movieModel.releaseDate)}",
                           style: AppTextstyles.headingTextPoppinsWhite,
                         ),
                         SizedBox(height: 12),
                         //! GET TICKETS BUTTON
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 85,
-                            vertical: 14,
-                          ),
-                          decoration: BoxDecoration(
-                            color: AppColors.blueThemeColor,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Text(
-                            'Get Tickets',
-                            style: AppTextstyles.headingTextPoppinsWhite,
+                        GestureDetector(
+                          onTap:
+                              () =>
+                                  NavigationHelper.navigateToWithoutReplacement(
+                                    context,
+                                    ScreenBookTickets(),
+                                  ),
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 85,
+                              vertical: 14,
+                            ),
+                            decoration: BoxDecoration(
+                              color: AppColors.blueThemeColor,
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text(
+                              'Get Tickets',
+                              style: AppTextstyles.headingTextPoppinsWhite,
+                            ),
                           ),
                         ),
                         SizedBox(height: 10),
