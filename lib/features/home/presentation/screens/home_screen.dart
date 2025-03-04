@@ -5,8 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tentwentyflix/core/config/app_colors.dart';
 import 'package:tentwentyflix/core/config/app_textstyles.dart';
 import 'package:tentwentyflix/core/utils/app_constants.dart';
+import 'package:tentwentyflix/features/details/presentation/screens/movie_details_screen.dart';
 import 'package:tentwentyflix/features/home/bloc/upcoming_movie_bloc/upcoming_movie_bloc.dart';
 import 'package:tentwentyflix/features/home/presentation/widgets/home_screen_widgets.dart';
+import 'package:tentwentyflix/shared/navigation_helper.dart';
 
 class ScreenHome extends StatelessWidget {
   // Callback for navigating to search screen
@@ -57,106 +59,118 @@ class ScreenHome extends StatelessWidget {
                       final imageUrl =
                           "${AppConstants.imageBaseUrl}${movie.posterPath}";
 
-                      return Padding(
-                        padding: const EdgeInsets.only(
-                          top: 18,
-                          left: 20,
-                          right: 20,
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(14),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: AppColors.darkPurpleThemeColor,
+                      return GestureDetector(
+                        // Navigate to Movie details screen
+                        onTap:
+                            () => NavigationHelper.navigateToWithoutReplacement(
+                              context,
+                              ScreenMovieDetails(movieModel: movie),
                             ),
-                            height: screenHeight * 0.22,
-                            width: double.infinity,
-                            child: Stack(
-                              fit: StackFit.expand,
-                              children: [
-                                //! MOVIE POSTER IMAGE
-                                if (movie.posterPath != null)
-                                  Image.network(
-                                    imageUrl,
-                                    fit: BoxFit.cover,
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                    loadingBuilder: (
-                                      context,
-                                      child,
-                                      loadingProgress,
-                                    ) {
-                                      if (loadingProgress == null) {
-                                        return child;
-                                      }
-                                      return Center(
-                                        child: CircularProgressIndicator(
-                                          value:
-                                              loadingProgress
-                                                          .expectedTotalBytes !=
-                                                      null
-                                                  ? loadingProgress
-                                                          .cumulativeBytesLoaded /
-                                                      loadingProgress
-                                                          .expectedTotalBytes!
-                                                  : null,
-                                        ),
-                                      );
-                                    },
-                                    errorBuilder: (context, error, stackTrace) {
-                                      log("Error loading image: $error");
-                                      return Center(
-                                        child: Icon(
-                                          Icons.error,
-                                          color: AppColors.redColor,
-                                        ),
-                                      );
-                                    },
-                                  ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            top: 18,
+                            left: 20,
+                            right: 20,
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(14),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: AppColors.darkPurpleThemeColor,
+                              ),
+                              height: screenHeight * 0.22,
+                              width: double.infinity,
+                              child: Stack(
+                                fit: StackFit.expand,
+                                children: [
+                                  //! MOVIE POSTER IMAGE
+                                  if (movie.posterPath != null)
+                                    Image.network(
+                                      imageUrl,
+                                      fit: BoxFit.cover,
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      loadingBuilder: (
+                                        context,
+                                        child,
+                                        loadingProgress,
+                                      ) {
+                                        if (loadingProgress == null) {
+                                          return child;
+                                        }
+                                        return Center(
+                                          child: CircularProgressIndicator(
+                                            value:
+                                                loadingProgress
+                                                            .expectedTotalBytes !=
+                                                        null
+                                                    ? loadingProgress
+                                                            .cumulativeBytesLoaded /
+                                                        loadingProgress
+                                                            .expectedTotalBytes!
+                                                    : null,
+                                          ),
+                                        );
+                                      },
+                                      errorBuilder: (
+                                        context,
+                                        error,
+                                        stackTrace,
+                                      ) {
+                                        log("Error loading image: $error");
+                                        return Center(
+                                          child: Icon(
+                                            Icons.error,
+                                            color: AppColors.redColor,
+                                          ),
+                                        );
+                                      },
+                                    ),
 
-                                //! BLACK GRADIENT SHADOW (Bottom to Center)
-                                Positioned(
-                                  bottom: 0,
-                                  left: 0,
-                                  right: 0,
-                                  child: Container(
-                                    height:
-                                        screenHeight *
-                                        0.15, // Adjust shadow height
-                                    decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                        begin: Alignment.bottomCenter,
-                                        end: Alignment.center,
-                                        colors: [
-                                          AppColors.blackColor.withValues(
-                                            alpha: 1,
-                                          ), // Dark at the bottom
-                                          AppColors.blackColor.withValues(
-                                            alpha: 0.7,
-                                          ), // Medium fade
-                                          AppColors.blackColor.withValues(
-                                            alpha: 0.3,
-                                          ), // Bit more medium fade
-                                          Colors.transparent,
-                                        ],
+                                  //! BLACK GRADIENT SHADOW (Bottom to Center)
+                                  Positioned(
+                                    bottom: 0,
+                                    left: 0,
+                                    right: 0,
+                                    child: Container(
+                                      height:
+                                          screenHeight *
+                                          0.15, // Adjust shadow height
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          begin: Alignment.bottomCenter,
+                                          end: Alignment.center,
+                                          colors: [
+                                            AppColors.blackColor.withValues(
+                                              alpha: 1,
+                                            ), // Dark at the bottom
+                                            AppColors.blackColor.withValues(
+                                              alpha: 0.7,
+                                            ), // Medium fade
+                                            AppColors.blackColor.withValues(
+                                              alpha: 0.3,
+                                            ), // Bit more medium fade
+                                            Colors.transparent,
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
 
-                                //! MOVIE TITLE TEXT
-                                Positioned(
-                                  bottom: 14,
-                                  left: 18,
-                                  child: Text(
-                                    movie.title, // Movie title displayed
-                                    style:
-                                        AppTextstyles.headingTextPoppinsWhite,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
+                                  //! MOVIE TITLE TEXT
+                                  Positioned(
+                                    bottom: 14,
+                                    left: 18,
+                                    child: Text(
+                                      movie.title, // Movie title displayed
+                                      style:
+                                          AppTextstyles.headingTextPoppinsWhite,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           ),
                         ),

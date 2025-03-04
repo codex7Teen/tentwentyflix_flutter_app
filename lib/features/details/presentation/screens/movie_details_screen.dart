@@ -10,6 +10,7 @@ import 'package:tentwentyflix/data/models/movie_model.dart';
 import 'package:tentwentyflix/features/details/bloc/movie_trailer_bloc/trailer_bloc.dart';
 import 'package:tentwentyflix/features/details/bloc/movie_trailer_bloc/trailer_state.dart';
 import 'package:tentwentyflix/features/details/presentation/screens/trailer_player_screen.dart';
+import 'package:tentwentyflix/features/details/presentation/widgets/no_trailer_dialog_widget.dart';
 
 class ScreenMovieDetails extends StatelessWidget {
   final MovieModel movieModel;
@@ -309,10 +310,7 @@ class ScreenMovieDetails extends StatelessWidget {
                   PlayTrailerEvent(state.trailers.first.key),
                 );
               } else {
-                return AlertDialog(
-                  title: Text('No Trailers'),
-                  content: Text('No trailers are available for this movie.'),
-                );
+                return NoTrailerDialogWidget();
               }
             }
 
