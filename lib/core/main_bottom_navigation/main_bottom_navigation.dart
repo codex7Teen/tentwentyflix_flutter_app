@@ -7,7 +7,8 @@ import 'package:tentwentyflix/features/search/presentation/screens/search_screen
 import 'package:tentwentyflix/shared/navigation_helper.dart';
 
 // Create a global key for the MainBottomNavigation state
-final GlobalKey<MainBottomNavigationState> bottomNavKey = GlobalKey<MainBottomNavigationState>();
+final GlobalKey<MainBottomNavigationState> bottomNavKey =
+    GlobalKey<MainBottomNavigationState>();
 
 class MainBottomNavigation extends StatefulWidget {
   // The normal key constructor, not trying to set both super.key and bottomNavKey
@@ -21,32 +22,39 @@ class MainBottomNavigation extends StatefulWidget {
 class MainBottomNavigationState extends State<MainBottomNavigation> {
   // Current selected index for the bottom navigation
   int _selectedIndex = 1; // Start with Watch selected (index 1)
-  
+
   // List of screens to display based on navigation index
   late final List<Widget> _screens;
-  
+
   @override
   void initState() {
     super.initState();
     // Initialize screens in initState to avoid recreation on each build
     _screens = [
-      const Center(child: Text('Dashboard Screen')), // Placeholder for Dashboard
+      const Center(
+        child: Text('Dashboard Screen'),
+      ), // Placeholder for Dashboard
       ScreenHome(onSearchTap: navigateToSearch), // Watch screen with callback
-      const Center(child: Text('Media Library Screen')), // Placeholder for Media Library
+      const Center(
+        child: Text('Media Library Screen'),
+      ), // Placeholder for Media Library
       const Center(child: Text('More Screen')), // Placeholder for More
     ];
   }
 
   // Public method to navigate to search screen
   void navigateToSearch() {
-    NavigationHelper.navigateToWithoutReplacement(context, _buildSearchScreenWithNav());
+    NavigationHelper.navigateToWithoutReplacement(
+      context,
+      _buildSearchScreenWithNav(),
+    );
   }
-  
+
   // Build method for search screen with navigation
   Widget _buildSearchScreenWithNav() {
     return Scaffold(
       body: const ScreenSearch(),
-      bottomNavigationBar: _buildBottomNavigationBar(),
+      bottomNavigationBar: buildBottomNavigationBar(),
     );
   }
 
@@ -56,11 +64,11 @@ class MainBottomNavigationState extends State<MainBottomNavigation> {
       _selectedIndex = index;
     });
   }
-  
+
   // Extract bottom navigation bar as a separate widget to reuse
-  Widget _buildBottomNavigationBar() {
+  Widget buildBottomNavigationBar() {
     final screenHeight = MediaQuery.sizeOf(context).height;
-    
+
     return Container(
       height: screenHeight > 500 ? screenHeight * 0.096 : screenHeight * 0.195,
       decoration: BoxDecoration(
@@ -76,7 +84,7 @@ class MainBottomNavigationState extends State<MainBottomNavigation> {
           // Custom font styles for labels
           selectedLabelStyle: GoogleFonts.roboto(fontWeight: FontWeight.bold),
           unselectedLabelStyle: GoogleFonts.roboto(fontSize: 12.2),
-        
+
           // Current selected index
           currentIndex: _selectedIndex,
           onTap: (index) {
@@ -86,17 +94,17 @@ class MainBottomNavigationState extends State<MainBottomNavigation> {
             }
             onItemTapped(index);
           },
-        
+
           // Colors for selected and unselected items
           selectedItemColor: AppColors.whiteColor,
           unselectedItemColor: AppColors.darkGreyThemeColor,
-        
+
           // Fixed navigation bar
           type: BottomNavigationBarType.fixed,
-        
+
           // Transparent background
           backgroundColor: Colors.transparent,
-        
+
           // Navigation items
           items: List.generate(navBarIcons.length, (index) {
             return BottomNavigationBarItem(
@@ -117,7 +125,7 @@ class MainBottomNavigationState extends State<MainBottomNavigation> {
     return Scaffold(
       // Display the selected screen
       body: _screens[_selectedIndex],
-      bottomNavigationBar: _buildBottomNavigationBar(),
+      bottomNavigationBar: buildBottomNavigationBar(),
     );
   }
 

@@ -12,32 +12,36 @@ class HomeScreenWidgets {
         screenHeight > 500 ? screenHeight * 0.084 : screenHeight * 0.12,
       ),
       child: SafeArea(
-        child: AppBar(
-          elevation: 0,
-          backgroundColor: AppColors.whiteColor,
-          flexibleSpace: Padding(
-            padding: const EdgeInsets.only(left: 22),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Watch',
-                style: AppTextstyles.headingTextPoppinsBlack,
-              ),
-            ),
-          ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 22, top: 16),
-              child: GestureDetector(
-                onTap: onTap, // Use the callback
-                child: Icon(
-                  Icons.search_rounded,
-                  color: AppColors.blackColor,
-                  size: 23.5,
+        child: Material(
+          elevation: 1, // Lower elevation to reduce shadow spread
+          shadowColor: AppColors.blackColor.withValues(alpha: 0.10),
+          child: AppBar(
+            elevation: 0,
+            backgroundColor: AppColors.whiteColor,
+            flexibleSpace: Padding(
+              padding: const EdgeInsets.only(left: 22),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Watch',
+                  style: AppTextstyles.headingTextPoppinsDarkPurple,
                 ),
               ),
             ),
-          ],
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 22, top: 16),
+                child: GestureDetector(
+                  onTap: onTap,
+                  child: Icon(
+                    Icons.search_rounded,
+                    color: AppColors.blackColor,
+                    size: 23.5,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

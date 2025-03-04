@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tentwentyflix/core/config/app_colors.dart';
 import 'package:tentwentyflix/core/config/app_textstyles.dart';
 import 'package:tentwentyflix/core/utils/app_constants.dart';
-import 'package:tentwentyflix/features/home/bloc/bloc/upcoming_movie_bloc.dart';
+import 'package:tentwentyflix/features/home/bloc/upcoming_movie_bloc/upcoming_movie_bloc.dart';
 import 'package:tentwentyflix/features/home/presentation/widgets/home_screen_widgets.dart';
 
 class ScreenHome extends StatelessWidget {
@@ -59,7 +59,7 @@ class ScreenHome extends StatelessWidget {
 
                       return Padding(
                         padding: const EdgeInsets.only(
-                          top: 20,
+                          top: 18,
                           left: 20,
                           right: 20,
                         ),
