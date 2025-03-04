@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tentwentyflix/core/config/app_colors.dart';
-import 'package:tentwentyflix/features/home/presentation/home_screen.dart';
+import 'package:tentwentyflix/features/home/presentation/screens/home_screen.dart';
 import 'package:tentwentyflix/features/search/presentation/screens/search_screen.dart';
 import 'package:tentwentyflix/shared/navigation_helper.dart';
 
