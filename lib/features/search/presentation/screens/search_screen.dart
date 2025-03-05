@@ -73,8 +73,7 @@ class ScreenSearch extends StatelessWidget {
                     errorMessage: genreState.message,
                   );
                 } else if (genreState is MovieGenreLoading) {
-                  // Just showing a sizedbox instead of progress indicatore or shimmer to avoid ui breaks
-                  return SizedBox.shrink();
+                  return Center(child: CircularProgressIndicator()); // Loading
                 } else if (genreState is MovieGenreLoaded) {
                   //! S H O W  G E N R E S
                   return SearchScreenWidgets.buildGenreList(

@@ -14,6 +14,7 @@ class TrailerBloc extends Bloc<TrailerEvent, TrailerState> {
     on<CloseTrailerEvent>(_onCloseTrailer);
   }
 
+  //! LOAD MOVIE TRAILER EVENT
   Future<void> _onLoadTrailer(
     LoadTrailerEvent event,
     Emitter<TrailerState> emit,
@@ -27,6 +28,7 @@ class TrailerBloc extends Bloc<TrailerEvent, TrailerState> {
     }
   }
 
+  //! PLAY MOVIE TRAILER EVENT
   Future<void> _onPlayTrailer(
     PlayTrailerEvent event,
     Emitter<TrailerState> emit,
@@ -45,6 +47,7 @@ class TrailerBloc extends Bloc<TrailerEvent, TrailerState> {
     );
   }
 
+  //! CLOSE MOVIE TRAILER EVENT
   Future<void> _onCloseTrailer(
     CloseTrailerEvent event,
     Emitter<TrailerState> emit,
