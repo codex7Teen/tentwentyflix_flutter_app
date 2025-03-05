@@ -1,4 +1,3 @@
-// main_bottom_navigation.dart
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tentwentyflix/core/config/app_colors.dart';
@@ -6,22 +5,20 @@ import 'package:tentwentyflix/features/home/presentation/screens/home_screen.dar
 import 'package:tentwentyflix/features/search/presentation/screens/search_screen.dart';
 import 'package:tentwentyflix/shared/navigation_helper.dart';
 
-// Create a global key for the MainBottomNavigation state
+// global key for the MainBottomNavigation state
 final GlobalKey<MainBottomNavigationState> bottomNavKey =
     GlobalKey<MainBottomNavigationState>();
 
 class MainBottomNavigation extends StatefulWidget {
-  // The normal key constructor, not trying to set both super.key and bottomNavKey
   const MainBottomNavigation({super.key});
 
   @override
   MainBottomNavigationState createState() => MainBottomNavigationState();
 }
 
-// Make the state class public so it can be accessed from other files
 class MainBottomNavigationState extends State<MainBottomNavigation> {
   // Current selected index for the bottom navigation
-  int _selectedIndex = 1; // Start with Watch selected (index 1)
+  int _selectedIndex = 1;
 
   // List of screens to display based on navigation index
   late final List<Widget> _screens;
@@ -98,11 +95,7 @@ class MainBottomNavigationState extends State<MainBottomNavigation> {
           // Colors for selected and unselected items
           selectedItemColor: AppColors.whiteColor,
           unselectedItemColor: AppColors.darkGreyThemeColor,
-
-          // Fixed navigation bar
           type: BottomNavigationBarType.fixed,
-
-          // Transparent background
           backgroundColor: Colors.transparent,
 
           // Navigation items

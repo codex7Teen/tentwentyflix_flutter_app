@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tentwentyflix/core/config/app_colors.dart';
 import 'package:tentwentyflix/core/config/app_textstyles.dart';
+import 'package:tentwentyflix/core/utils/format_date_util.dart';
+import 'package:tentwentyflix/data/models/movie_model.dart';
 import 'package:tentwentyflix/features/book_tickets/presentation/widgets/arc_painter_widget.dart';
 import 'package:tentwentyflix/shared/custom_blue_button.dart';
 import 'package:tentwentyflix/shared/custom_control_button.dart';
@@ -328,6 +330,7 @@ class SelectSeatsScreenWidgets {
   static PreferredSizeWidget buildAppbar(
     double screenHeight,
     BuildContext context,
+    MovieModel movieModel,
   ) {
     return PreferredSize(
       preferredSize: Size.fromHeight(
@@ -348,11 +351,11 @@ class SelectSeatsScreenWidgets {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'movieModel.title',
+                    movieModel.title,
                     style: AppTextstyles.headingTextPoppinsDarkPurple,
                   ),
                   Text(
-                    "In Theaters {FormatDateUtil.formatReleaseDate(movieModel.releaseDate)}",
+                    "In Theaters ${FormatDateUtil.formatReleaseDate(movieModel.releaseDate)}",
                     style: GoogleFonts.poppins(
                       fontSize: 12,
                       color: AppColors.blueThemeColor,

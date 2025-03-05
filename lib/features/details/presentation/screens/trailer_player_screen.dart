@@ -6,6 +6,7 @@ import 'package:tentwentyflix/features/details/bloc/movie_trailer_bloc/trailer_b
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class TrailerPlayerScreen extends StatelessWidget {
+  //! V I D E O  K E Y  &  C O N T R O L L E R
   final String videoKey;
   final YoutubePlayerController playerController;
 
@@ -17,6 +18,7 @@ class TrailerPlayerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //! S C A F F O L D
     return Scaffold(
       backgroundColor: Colors.black,
       body: Center(
@@ -28,7 +30,7 @@ class TrailerPlayerScreen extends StatelessWidget {
             playerController.play();
           },
           onEnded: (metaData) {
-            // Automatically exit when trailer ends
+            //! A U T O - C L O S E   O N   E N D
             context.read<TrailerBloc>().add(CloseTrailerEvent());
             Navigator.of(context).pop();
           },
@@ -44,6 +46,7 @@ class TrailerPlayerScreen extends StatelessWidget {
           ),
         ),
         onPressed: () {
+          //! C L O S E  O N  T A P
           context.read<TrailerBloc>().add(CloseTrailerEvent());
           Navigator.of(context).pop();
         },

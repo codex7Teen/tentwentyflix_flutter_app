@@ -16,7 +16,11 @@ class ScreenBookTickets extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.whiteColor2,
       //! A P P - B A R
-      appBar: BookTicketsScreenWidgets.buildAppbar(screenHeight, context),
+      appBar: BookTicketsScreenWidgets.buildAppbar(
+        screenHeight,
+        context,
+        movieModel,
+      ),
       //! B O D Y
       body: Padding(
         padding: const EdgeInsets.only(left: 20, bottom: 24),

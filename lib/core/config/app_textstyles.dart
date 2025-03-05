@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tentwentyflix/core/config/app_colors.dart';
-
+//! A P P  -  T E X T S T Y L E S
 class AppTextstyles {
   static TextStyle headingTextPoppinsDarkPurple = GoogleFonts.poppins(
     fontSize: 17.8,

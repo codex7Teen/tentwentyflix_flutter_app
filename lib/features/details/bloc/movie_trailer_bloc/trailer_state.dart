@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:equatable/equatable.dart';
 import 'package:tentwentyflix/data/models/trailer_model.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';

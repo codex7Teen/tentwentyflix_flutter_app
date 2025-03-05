@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tentwentyflix/core/config/app_colors.dart';
+import 'package:tentwentyflix/core/utils/screen_dimension_util.dart';
 import 'package:tentwentyflix/data/models/movie_model.dart';
 import 'package:tentwentyflix/features/search/presentation/widgets/search_results_screen_widgets.dart';
 import 'package:tentwentyflix/features/search/presentation/widgets/search_screen_widgets.dart';
@@ -12,12 +13,13 @@ class ScreenSearchResults extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.sizeOf(context).height;
-    final screenWidth = MediaQuery.sizeOf(context).width;
+    final screenHeight = ScreenDimensionsUtil.getScreenHeight(context);
+    final screenWidth = ScreenDimensionsUtil.getScreenWidth(context);
 
-    // Access the MainBottomNavigationState to get the bottom navigation bar
+    // Accessing the MainBottomNavigationState to get the bottom navigation bar
     final bottomNavBar = bottomNavKey.currentState?.buildBottomNavigationBar();
 
+    //! S C A F F O L D
     return Scaffold(
       backgroundColor: AppColors.whiteColor2,
       appBar: SearchResultsScreenWidgets.buildAppbar(
@@ -41,7 +43,6 @@ class ScreenSearchResults extends StatelessWidget {
           },
         ),
       ),
-      // Add the bottom navigation bar here
       bottomNavigationBar: bottomNavBar,
     );
   }

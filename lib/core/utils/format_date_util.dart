@@ -1,7 +1,7 @@
 import 'package:intl/intl.dart';
 
 class FormatDateUtil {
-  // Formatted Movie release date
+  //! F O R M A T T E D   M O V I E   R E L E A S E   D A T E
   static String formatReleaseDate(String date) {
     try {
       DateTime parsedDate = DateTime.parse(date);

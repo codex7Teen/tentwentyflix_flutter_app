@@ -15,7 +15,7 @@ class ScreenSelectSeats extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.whiteColor2,
       //! A P P - B A R
-      appBar: SelectSeatsScreenWidgets.buildAppbar(screenHeight, context),
+      appBar: SelectSeatsScreenWidgets.buildAppbar(screenHeight, context, movieModel),
       //! B O D Y
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
