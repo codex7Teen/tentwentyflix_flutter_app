@@ -1,16 +1,34 @@
-# tentwentyflix
+# TenTwentyFlix 🎬
 
-A new Flutter project.
+TenTwentyFlix is a Flutter-based movie streaming app similar to Netflix. It allows users to browse movies, search for specific titles, view trailers, and access a static ticket booking page. The app is built with clean architecture, best practices, and an efficient state management approach using BLoC.
 
-## Getting Started
+## 📱 Features
 
-This project is a starting point for a Flutter application.
+- **Movie Listing** – Browse the latest movies fetched from the TMDB API.
+- **Movie Search** – Search for specific movies seamlessly.
+- **Movie Trailers** – Watch trailers directly from the app.
+- **Ticket Booking (Static)** – A dedicated ticket booking screen.
+- **State Management** – Implemented using BLoC for structured state handling.
+- **Optimized API Calls** – Used Dio package for efficient data fetching.
+- **Custom Widgets & Utils** – Modular and reusable components for maintainability.
 
-A few resources to get you started if this is your first Flutter project:
+## 🚀 Tech Stack
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Flutter** – Framework for cross-platform development.
+- **Dart** – Programming language.
+- **BLoC (Business Logic Component)** – State management.
+- **Dio** – API fetching.
+- **TMDB API** – Data source for movie details.
+- **Figma** – Used as a design reference.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📧 Contact
+
+For any queries, feel free to reach out:
+
+- **Developer**: Dennis
+- **Email**: djconnect189@gmail.com
+- **LinkedIn**: [Your Profile](https://www.linkedin.com/in/dennis-johnson-flutter-developer/)
+
+---
+
+⭐ If you like this project, give it a star on GitHub!
