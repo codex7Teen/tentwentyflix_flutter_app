@@ -6,6 +6,7 @@ import 'package:tentwentyflix/core/config/app_colors.dart';
 import 'package:tentwentyflix/features/search/bloc/movie_genre_bloc/movie_genre_bloc.dart';
 import 'package:tentwentyflix/features/search/bloc/movie_search_bloc/movie_search_bloc.dart';
 import 'package:tentwentyflix/features/search/presentation/widgets/search_screen_widgets.dart';
+import 'package:tentwentyflix/shared/user_friendly_error_display_widget.dart';
 
 class ScreenSearch extends StatelessWidget {
   const ScreenSearch({super.key});
@@ -68,14 +69,12 @@ class ScreenSearch extends StatelessWidget {
             return BlocBuilder<MovieGenreBloc, MovieGenreState>(
               builder: (context, genreState) {
                 if (genreState is MovieGenreError) {
-                  return Center(
-                    child: Text(
-                      genreState.message,
-                      style: TextStyle(color: Colors.red), // Error message
-                    ),
+                  return UserFriendlyErrorDisplayWidget(
+                    errorMessage: genreState.message,
                   );
                 } else if (genreState is MovieGenreLoading) {
-                  return Center(child: CircularProgressIndicator()); // Loading
+                  // Just showing a sizedbox instead of progress indicatore or shimmer to avoid ui breaks
+                  return SizedBox.shrink();
                 } else if (genreState is MovieGenreLoaded) {
                   //! S H O W  G E N R E S
                   return SearchScreenWidgets.buildGenreList(

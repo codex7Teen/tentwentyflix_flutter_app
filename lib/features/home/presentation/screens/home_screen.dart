@@ -5,6 +5,7 @@ import 'package:tentwentyflix/core/config/app_colors.dart';
 import 'package:tentwentyflix/core/utils/screen_dimension_util.dart';
 import 'package:tentwentyflix/features/home/bloc/upcoming_movie_bloc/upcoming_movie_bloc.dart';
 import 'package:tentwentyflix/features/home/presentation/widgets/home_screen_widgets.dart';
+import 'package:tentwentyflix/shared/user_friendly_error_display_widget.dart';
 
 class ScreenHome extends StatelessWidget {
   //! C A L L B A C K - S E A R C H
@@ -35,9 +36,7 @@ class ScreenHome extends StatelessWidget {
         builder: (context, state) {
           if (state is UpcomingMovieError) {
             //! S H O W  E R R O R
-            return Center(
-              child: Text(state.message, style: TextStyle(color: Colors.red)),
-            );
+            return UserFriendlyErrorDisplayWidget(errorMessage: state.message);
           } else if (state is UpcomingMovieLoading) {
             //! S H O W  L O A D I N G
             return Center(child: CircularProgressIndicator());
